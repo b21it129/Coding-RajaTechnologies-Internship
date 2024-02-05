@@ -1,0 +1,18 @@
+# Example using Surprise library
+from surprise import Dataset, Reader
+from surprise.model_selection import train_test_split
+from surprise import SVD  # or any other algorithm
+
+# Load data
+reader = Reader(line_format='user item rating', sep=',', rating_scale=(1, 10))
+data = Dataset.load_from_df(your_data_frame, reader)
+
+# Split data into training and testing sets
+trainset, testset = train_test_split(data, test_size=0.2)
+
+# Choose an algorithm and train the model
+algo = SVD()
+algo.fit(trainset)
+
+# Evaluate the model
+predictions = algo.test(testset)
