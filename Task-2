@@ -1,0 +1,18 @@
+# Sample code for data preprocessing
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from imblearn.over_sampling import SMOTE
+from sklearn.preprocessing import StandardScaler
+
+# Assuming 'your_data_frame' is your dataset
+# Clean data by handling missing values
+your_data_frame = your_data_frame.dropna()
+
+# Balance the dataset using SMOTE (Synthetic Minority Over-sampling Technique) for class imbalance
+X = your_data_frame.drop('fraud_label', axis=1)
+y = your_data_frame['fraud_label']
+X_resampled, y_resampled = SMOTE().fit_resample(X, y)
+
+# Standardize features
+scaler = StandardScaler()
+X_resampled = scaler.fit_transform(X_resampled)
